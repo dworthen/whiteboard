@@ -47,6 +47,7 @@ app.post('/', function(req, res) {
   var data = {uri: uuid()};
   data.name = req.body.session;
   data.password = req.body.usePassword ? req.body.password : false;
+  data.users = [];
   rooms[data.uri] = data;
   res.redirect('/room/' + data.uri);
 });

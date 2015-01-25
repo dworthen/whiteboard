@@ -122,7 +122,7 @@ var app = (function($) {
 
     return {
       init: function() {
-        // login();
+        login();
         addCanvas('canvas', id);
         socket.emit('join', {id: id, room: room});
       }
