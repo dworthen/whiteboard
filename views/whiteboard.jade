@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  #header
+    strong= data.name + ' '
+    button#clear Clear
+    select#color
+      option(value="#000000") Black
+      option(value="#ff0000") Red
+      option(value="#0000ff") Blue
+      option(value="#ffff00") Yellow
+      option(value="#00ff00") Green
+  #content
+    #whiteboards
+    #canvas
+
+block scripts
+  script(type="text/javascript", src="/socket.io/socket.io.js")
+  script(type="text/javascript", src="/javascripts/script.js")
+  script(type="text/javascript").
+    var data = !{JSON.stringify(data)};
+    app(data).init();

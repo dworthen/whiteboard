@@ -1,0 +1,25 @@
+extends layout
+
+block content
+  h1= title
+  h3 Create Session
+  form(method="post")
+    label(for="session") Session Name:
+    input#session(type="text", name="session")
+    br
+    input#usePassword(type="checkbox", name="usePassword")
+    label(for="usePassword") Password?
+    br
+    #passwordDiv.hide
+      label(for="password") Password:
+      input#password(type="text", name="password")
+    br
+    input(type="submit", value="Submit")
+
+block scripts
+  script(type="text/javascript").
+    $(function() {
+      $('#usePassword').on('change', function() {
+        $('#passwordDiv').toggleClass('hide');
+      });
+    });
