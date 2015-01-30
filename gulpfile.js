@@ -4,11 +4,12 @@ var gulp = require('gulp'),
   stripDebug = require('gulp-strip-debug'),
   uglify = require('gulp-uglify'),
   browserSync = require('browser-sync'),
+  sass = require('gulp-sass'),
   nodemon = require('gulp-nodemon');
 
 var BROWSER_SYNC_RELOAD_DELAY = 500;
 
-gulp.task('browser-sync', ['nodemon'], function() {
+gulp.task('browser-sync', ['watch'], function() {
   browserSync.init({
 
     // watch the following files; changes will be injected (css & images) or cause browser to refresh
@@ -27,9 +28,15 @@ gulp.task('browser-sync', ['nodemon'], function() {
 });
 
 gulp.task('jshint', function() {
-  gulp.src(__dirname + '/src/js/*')
+  gulp.src(__dirname + '/src/js/*.js')
     .pipe(jshint())
     .pipe(jshint.reporter('default'));
+});
+
+gulp.task('sass', function() {
+  gulp.src('./src/scss/*.scss')
+    .pipe(sass())
+    .pipe(gulp.dest('./public/stylesheets'));
 });
 
 gulp.task('scripts', function() {
@@ -44,7 +51,8 @@ gulp.task('scripts', function() {
 gulp.task('nodemon', function() {
   nodemon({
     script: 'app.js',
-    ext: 'html js jade'
+    ext: 'js jade',
+    ignore: ['./src/**']
   })
     .on('change', ['scripts'])
     .on('restart', function() {
@@ -57,4 +65,10 @@ gulp.task('nodemon', function() {
     });
 });
 
-gulp.task('default', ['scripts', 'browser-sync']);
+gulp.task('compile', ['scripts', 'sass']);
+
+gulp.task('watch', ['nodemon'], function() {
+  gulp.watch('./src/scss/*.scss', ['sass']);
+});
+
+gulp.task('default', ['compile', 'browser-sync']);
