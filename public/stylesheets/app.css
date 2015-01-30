@@ -1,5 +1,9 @@
 body {
   padding: 0px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  margin: 0;
-  background-color: blue; }
+  margin: 0; }
+
+canvas {
+  display: block;
+  float: left;
+  border: 1px red solid; }

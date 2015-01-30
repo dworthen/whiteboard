@@ -43,6 +43,12 @@ app.get('/', function(req, res) {
   });
 });
 
+app.get('/test', function(req, res) {
+  res.render('testCanvas', {
+    title: 'Testing Canvas features'
+  });
+});
+
 app.post('/', function(req, res) {
   var data = {uri: uuid()};
   data.name = req.body.session;

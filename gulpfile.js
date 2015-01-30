@@ -7,7 +7,7 @@ var gulp = require('gulp'),
   sass = require('gulp-sass'),
   nodemon = require('gulp-nodemon');
 
-var BROWSER_SYNC_RELOAD_DELAY = 500;
+var BROWSER_SYNC_RELOAD_DELAY = 700;
 
 gulp.task('browser-sync', ['watch'], function() {
   browserSync.init({
@@ -52,7 +52,7 @@ gulp.task('nodemon', function() {
   nodemon({
     script: 'app.js',
     ext: 'js jade',
-    ignore: ['./src/**']
+    ignore: ['./src', './public']
   })
     .on('change', ['scripts'])
     .on('restart', function() {
